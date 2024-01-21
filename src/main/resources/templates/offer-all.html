@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+               <!-- <div class="text-center">
+                    <a th:href="@{/offers/all(sort=asc)}">Sort by Price (Asc)</a> |
+                    <a th:href="@{/offers/all(sort=desc)}">Sort by Price (Desc)</a>
+                </div>-->
+
+                <div class="text-center">
+                    <form th:action="@{/offers/all}" method="get">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="minPrice" class="form-label">Min Price:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" id="minPrice" name="minPrice" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="maxPrice" class="form-label">Max Price:</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" id="maxPrice" name="maxPrice" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="invisible">Filter Button</label>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <h2 class="text-center text-dark mt-5">All Offers</h2>
+                <div class="table align-self-left">
+                    <!-- Add this code inside the <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5"> -->
+
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+
+                            <th>Image</th> <!-- Changed from "Image URL" to "Image" -->
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Engine</th>
+                            <th>Mileage</th>
+                            <th>Transmission</th>
+                            <th>Year</th>
+                            <th>Price</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="offer : ${showofferDtos}">
+                            <td>
+                                <img th:src="${offer.imageUrl}" alt="Offer Image" style="max-width: 100px; max-height: 100px;">
+                            </td>
+                            <td th:text="${offer.model.brand.name}"></td>
+                            <td th:text="${offer.model.name}"></td>
+                            <td th:text="${offer.engine}"></td>
+                            <td th:text="${offer.mileage}"></td>
+                            <td th:text="${offer.transmission}"></td>
+                            <td th:text="${offer.year}"></td>
+                            <td th:text="${offer.price}"></td>
+
+
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

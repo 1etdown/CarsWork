@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<div class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Edit Offer</h1>
+                </div>
+                <form th:action="@{/offers/add}"
+                      th:method="post"
+                      th:object="${offerModel}"
+                      class="m-md-auto w-50 pb-3">
+
+                    <div class="mb-3">
+                        <label class="form-label" for="model">Select Model</label>
+                        <select class="form-control text-center"
+                                id="model" name="model.id" th:field="*{model.id}">
+                            <option th:each="modelDto : ${availableModels}"
+                                    th:value="${modelDto.id}" th:text="${modelDto.name}">Model Name
+                            </option>
+
+                        </select>
+
+                        <small th:if="${#fields.hasErrors('model.id')}" th:errors="*{model.id}" class="text-danger">Error message</small>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description</label>
+                        <textarea th:field="*{description}"
+                                  th:errorclass="is-invalid"
+                                  class="form-control text-center"
+                                  id="description" name="description"></textarea>
+                        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="engine">Engine Type</label>
+                        <select class="form-control text-center"
+                                id="engine" name="engine" th:field="*{engine}">
+                            <option th:each="engineType : ${T(com.example.springdatabasicdemo.enums.EngineType).values()}"
+                                    th:value="${engineType}" th:text="${engineType}">Engine Type
+                            </option>
+                        </select>
+                        <small th:if="${#fields.hasErrors('engine')}" th:errors="*{engine}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="mileage">Mileage</label>
+                        <input th:field="*{mileage}"
+                               th:errorclass="is-invalid" type="number" min="0"
+                               class="form-control text-center" id="mileage"
+                               aria-describedby="mileage" name="mileage"/>
+                        <small th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="price">Price</label>
+                        <input th:field="*{price}"
+                               th:errorclass="is-invalid" type="number" min="0"
+                               class="form-control text-center" id="price"
+                               aria-describedby="price" name="price"/>
+                        <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger">Error
+                            message</small>
+                    </div>
+                    <!-- ... (previous HTML code) ... -->
+
+                    <div class="mb-3">
+                        <label class="form-label" for="transmission">Transmission Type</label>
+                        <select class="form-control text-center"
+                                id="transmission" name="transmission" th:field="*{transmission}">
+                            <option th:each="transmissionType : ${T(com.example.springdatabasicdemo.enums.TransmissionType).values()}"
+                                    th:value="${transmissionType}" th:text="${transmissionType}">Transmission Type
+                            </option>
+                        </select>
+                        <small th:if="${#fields.hasErrors('transmission')}" th:errors="*{transmission}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="year">Year</label>
+                        <input th:field="*{year}"
+                               th:errorclass="is-invalid" type="number" min="1900"
+                               class="form-control text-center" id="year"
+                               aria-describedby="year" name="year"/>
+                        <small th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="imageUrl">Image URL</label>
+                        <input th:field="*{imageUrl}"
+                               th:errorclass="is-invalid" type="text"
+                               class="form-control text-center" id="imageUrl"
+                               aria-describedby="imageUrl" name="imageUrl"/>
+                        <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">Add Offer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<footer th:replace="fragments/footer"/>
+</html>
