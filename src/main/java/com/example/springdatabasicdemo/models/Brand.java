@@ -8,19 +8,16 @@ import java.util.Set;
 @Entity
 @Table(name = "brands")
 public class Brand extends BaseEntity {
+    private String name;
+    private Date created;
+    private Date modified;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<Model> model;
 
 
-    @Column(name = "name")
-    private String name;
 
-    @Column(name = "created")
-    private Date created;
 
-    @Column(name = "modified")
-    private Date modified;
 
     public Brand(String name, Date created, Date modified) {
         this.name = name;

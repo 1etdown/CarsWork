@@ -9,7 +9,7 @@
             <div class="col-md-2"></div>
             <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
                 <div class="justify-content-center">
-                    <h1>Edit Offer</h1>
+                    <h1>Add Offer</h1>
                 </div>
                 <form th:action="@{/offers/add}"
                       th:method="post"
@@ -71,7 +71,6 @@
                         <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger">Error
                             message</small>
                     </div>
-                    <!-- ... (previous HTML code) ... -->
 
                     <div class="mb-3">
                         <label class="form-label" for="transmission">Transmission Type</label>

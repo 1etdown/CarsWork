@@ -13,8 +13,6 @@ public class ShowOfferDto {
     private UUID id;
     private ShowBrandDto brand;
     private ModelDto model;
-
-
     private EngineType engine;
     private String imageUrl;
     private int mileage;

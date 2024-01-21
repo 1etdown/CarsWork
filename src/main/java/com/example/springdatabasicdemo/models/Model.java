@@ -10,30 +10,22 @@ import com.example.springdatabasicdemo.enums.Category;
 @Entity
 @Table(name = "models")
 public class Model extends BaseEntity {
+
+    private String name;
+    private Category category;
+    private String imageUrl;
+    private Integer startYear;
+    private Integer endYear;
+    private Date created;
+    private Date modified;
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ManyToOne(optional = false)
+
+    @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable=false)
+    private Brand brand;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "model")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<Offer> offers;
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "brand_id", referencedColumnName = "id", nullable=false)
-    private Brand brand;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "category")
-    private Category category;
-    @Column(name = "image_url")
-    private String imageUrl;
-    @Column(name = "start_year")
-    private Integer startYear;
-    @Column(name = "end_year")
-    private Integer endYear;
-
-
-    @Column(name = "created")
-    private Date created;
-
-    @Column(name = "modified")
-    private Date modified;
 
 
     public Model(String name, Category category, String imageUrl, Integer startYear, Integer endYear, Date created, Date modified) {

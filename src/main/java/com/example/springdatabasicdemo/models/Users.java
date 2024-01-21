@@ -8,13 +8,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class Users extends BaseEntity {
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<UserRole> role;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Offer> offers;
@@ -30,6 +23,14 @@ public class Users extends BaseEntity {
 
     private String email;
     private int age;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<UserRole> role;
+
+
 
     public Users() {
     }

@@ -11,7 +11,6 @@ public class UserRole extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, length = 50)
     private Role name;
-
     public UserRole(Role name) {
         this.name = name;
     }

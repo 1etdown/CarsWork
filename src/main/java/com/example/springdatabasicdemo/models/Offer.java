@@ -10,6 +10,15 @@ import com.example.springdatabasicdemo.enums.EngineType;
 @Entity
 @Table(name = "offers")
 public class Offer extends BaseEntity {
+    private String description;
+    private EngineType engine;
+    private String imageUrl;
+    private int mileage;
+    private BigDecimal price;
+    private TransmissionType transmission;
+    private int year;
+    private Date created;
+    private Date modified;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "model_id", referencedColumnName = "id", nullable=false)
@@ -19,25 +28,8 @@ public class Offer extends BaseEntity {
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @Column(name = "description")
-    private String description;
-    @Column(name = "engine")
-    private EngineType engine;
-    @Column(name = "image_url")
-    private String imageUrl;
-    @Column(name = "mileage")
-    private int mileage;
-    @Column(name = "price")
-    private BigDecimal price;
-    @Column(name = "transmission")
-    private TransmissionType transmission;
-    @Column(name = "year")
-    private int year;
-    @Column(name = "created")
-    private Date created;
 
-    @Column(name = "modified")
-    private Date modified;
+
     public Offer(String description, EngineType engine, String imageUrl,int mileage,BigDecimal price,TransmissionType transmission,int year,Date created,Date modified) {
         this.description = description;
         this.engine = engine;
