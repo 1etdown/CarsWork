@@ -28,7 +28,6 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/offers")
 public class OfferController {
-
     @Autowired
     private final OfferService offerService;
     @Autowired
@@ -37,11 +36,7 @@ public class OfferController {
     private final BrandService brandService;
     private final UserRepository userRepository;
     private static final Logger LOG = LogManager.getLogger(Controller.class);
-
     private final OfferRepository offerRepository;
-
-
-
     @Autowired
     public OfferController(OfferRepository offerRepository,OfferService offerService, ModelService modelService, BrandService brandService, UserRepository userRepository) {
         this.offerService = offerService;
@@ -81,13 +76,10 @@ public class OfferController {
         offerService.createOffer(offerModel);
         return "redirect:/offers/all";
     }
-
-
     @GetMapping("/all")
     public String showAllOffers(
             @RequestParam(name = "minPrice", required = false) Double minPrice,
             @RequestParam(name = "maxPrice", required = false) Double maxPrice,
-            @RequestParam(name = "sort", defaultValue = "asc") String sort,
             Principal principal,
             Model model) {
         LOG.log(Level.INFO, "Show All offers for " + principal.getName());
@@ -100,34 +92,26 @@ public class OfferController {
             showofferDtos = offerService.getAll();
         }
 
-
-
         model.addAttribute("showofferDtos", showofferDtos);
         return "offer-all";
     }
-
-
-
     @GetMapping("/offer-details/{offer-id}")
     public String OfferDetails(@PathVariable("offer-id") UUID id, Model model) {
         model.addAttribute("offerDetails", offerService.offerDetails(id));
+
         return "offer-details";
     }
-
-
     @GetMapping("/offer-delete/{id}")
     public String deleteOffer(@PathVariable UUID id) {
         offerService.deleteOffer(id);
         return "redirect:/offers/all";
     }
-
     @GetMapping("/offer-edit/{id}")
     public String editOffer(@PathVariable UUID id, Model model) {
         OfferDto offer = offerService.find(id).orElse(null);
         model.addAttribute("offerModel", offer);
         return "offer-edit";
     }
-
     @PostMapping("/offer-edit")
     public String editOffer(@Valid @ModelAttribute("offerModel") OfferDto offerModel,
                             BindingResult bindingResult,
@@ -143,14 +127,4 @@ public class OfferController {
         return "redirect:/offers/all";
     }
 
-   /* public List<ShowOfferDto> getLastTwoOffers() {
-        List<ShowOfferDto> allOffersSortedByDate = offerRepository.getAllOffersSortedByDate();
-
-
-        int size = allOffersSortedByDate.size();
-        int startIndex = size - 2 >= 0 ? size - 2 : 0;
-        int endIndex = size;
-
-        return allOffersSortedByDate.subList(startIndex, endIndex);
-    }*/
 }

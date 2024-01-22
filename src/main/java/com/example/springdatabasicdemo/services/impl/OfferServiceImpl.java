@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -79,8 +82,12 @@ public class OfferServiceImpl implements OfferService {
     public OfferDto updateOffer(OfferDto offer) {
         return modelMapper.map(offerRepository.save(modelMapper.map(offer, Offer.class)), OfferDto.class);
     }
-    public ShowDetaildOfferDto offerDetails(UUID offerId) {
-        return modelMapper.map(offerRepository.findById(offerId).orElse(null), ShowDetaildOfferDto.class);
+
+    @Cacheable("offer")
+
+
+    public ShowDetaildOfferDto offerDetails(UUID id) {
+        return modelMapper.map(offerRepository.findById(id).orElse(null), ShowDetaildOfferDto.class);
     }
     @Override
     public List<ShowOfferDto> getByPriceRange(Double minPrice, Double maxPrice) {
@@ -102,6 +109,13 @@ public class OfferServiceImpl implements OfferService {
     }
 
     private List<ShowOfferDto> mapToDtoList(List<Offer> offers) {
+        return offers.stream()
+                .map(offer -> modelMapper.map(offer, ShowOfferDto.class))
+                .collect(Collectors.toList());
+    }
+    @Override
+    public List<ShowOfferDto> getTwoOffers() {
+        List<Offer> offers =offerRepository.findTop2ByOrderByPriceDesc();
         return offers.stream()
                 .map(offer -> modelMapper.map(offer, ShowOfferDto.class))
                 .collect(Collectors.toList());

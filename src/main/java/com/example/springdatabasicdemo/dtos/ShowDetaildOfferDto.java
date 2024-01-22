@@ -4,44 +4,53 @@ import com.example.springdatabasicdemo.enums.EngineType;
 import com.example.springdatabasicdemo.enums.TransmissionType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.modelmapper.internal.bytebuddy.asm.Advice;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
 public class ShowDetaildOfferDto {
-
-
     private UUID id;
-    private ModelDto model;
-    private String user;
-    private String description;
+    private ShowBrandDto brand;
+    private ShowModelDto model;
     private EngineType engine;
     private String imageUrl;
     private int mileage;
     private BigDecimal price;
     private TransmissionType transmission;
     private int year;
-    private Date created;
-    private Date modified;
+    private String description;
 
-    public ShowDetaildOfferDto(UUID id, ModelDto model, String user, String description, EngineType engine, String imageUrl, int mileage, BigDecimal price, TransmissionType transmission, int year, Date created, Date modified) {
-        this.id = id;
+
+    public ShowDetaildOfferDto(UUID id, ShowModelDto model, UserDto user, String description, EngineType engine, String imageUrl, int mileage, BigDecimal price, TransmissionType transmission, int year, Date created, Date modified, ShowBrandDto brand) {
+
         this.model = model;
-        this.user = user;
-        this.description = description;
+        this.id = id;
         this.engine = engine;
         this.imageUrl = imageUrl;
         this.mileage = mileage;
         this.price = price;
         this.transmission = transmission;
         this.year = year;
-        this.created = created;
-        this.modified = modified;
+        this.brand = brand;
+        this.description=description;
+
     }
 
     public ShowDetaildOfferDto() {
     }
+
+
+
+    public ShowModelDto getModel() {
+        return model;
+    }
+
+    public void setModel(ShowModelDto model) {
+        this.model = model;
+    }
+
 
     public UUID getId() {
         return id;
@@ -50,31 +59,6 @@ public class ShowDetaildOfferDto {
     public void setId(UUID id) {
         this.id = id;
     }
-
-    public ModelDto getModel() {
-        return model;
-    }
-
-    public void setModel(ModelDto model) {
-        this.model = model;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public EngineType getEngine() {
         return engine;
     }
@@ -89,6 +73,13 @@ public class ShowDetaildOfferDto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getMileage() {
@@ -123,24 +114,11 @@ public class ShowDetaildOfferDto {
         this.year = year;
     }
 
-    public Date getCreated() {
-        return created;
+    public ShowBrandDto getBrand() {
+        return brand;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getModified() {
-        return modified;
-    }
-
-    public void setModified(Date modified) {
-        this.modified = modified;
-    }
-
-    @Override
-    public String toString() {
-        return "Offer {id=" + id + ", model=" + model + ", user=" + user + ", description='" + description + "', engine=" + engine + ", imageUrl='" + imageUrl + "', mileage=" + mileage + ", price=" + price + ", transmission=" + transmission + ", year=" + year + ", created=" + created + ", modified=" + modified + " }";
+    public void setBrand(ShowBrandDto brand) {
+        this.brand = brand;
     }
 }

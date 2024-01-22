@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head"/>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
 <body class="d-flex flex-column h-100">
 <div th:replace="fragments/navbar">Navbar</div>
 <main class="flex-shrink-0">
     <div class="container">
         <div class="row">
-            <div class="col-md-2"></div>
-            <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
-                <div class="justify-content-center">
-                    <h1>Offer Details</h1>
-                </div>
-                <div class="row bg-light rounded">
-                    <div class="col-md-6"><img src="/pic/company.png" height="350px"></div>
-                    <div class="col-md-6 pt-3">
-                        <h2>Offer</h2>
-                        <h2 th:text="'Model: ' + ${offerDetails.models}"></h2>
-                        <h2 th:text="'User: ' + ${offerDetails.users}"></h2>
-                        <h4 th:text="'Price: ' + ${offerDetails.price}"></h4>
-                        <h4 th:text="'Year: ' + ${offerDetails.year}"></h4>
-                        <h5 th:text="'Description: ' + ${offerDetails.description}"></h5>
-                        <div class="btn-group">
-                            <a class="btn btn-success btn-lg mx-2" th:href="@{/offer/edit/{offer-id}(offer-id=${offerDetails.id})}">Edit</a>
-                            <a class="btn btn-danger btn-lg" th:href="@{/offer/delete/{offer-id}(offer-id=${offerDetails.id})}">Delete</a>
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="#" th:src="${offerDetails.imageUrl}" class="img-fluid rounded-start" alt="Image">
+                            <h1 th:text="'Model: ' + ${offerDetails.model.name}"></h1>
+                            <h1 th:text="'Description: ' + ${offerDetails.description}"></h1>
                         </div>
+                        <div class="col-md-8">
+                            <div>
+                                <h2 class="card-title text-center text-dark">Detaild Offer Info</h2>
+                                <h2 th:text="'Engine Type: ' + ${offerDetails.engine}"></h2>
+                                <h2 th:text="'Mileage: ' + ${offerDetails.mileage}"></h2>
+                                <h2 th:text="'Price: ' + ${offerDetails.price}"></h2>
+                                <h2 th:text="'Transmission Type: ' + ${offerDetails.transmission}"></h2>
+                                <h2 th:text="'Year: ' + ${offerDetails.year}"></h2>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 </main>

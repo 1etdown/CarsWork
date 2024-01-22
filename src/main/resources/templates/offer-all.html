@@ -32,24 +32,25 @@
                                     <span class="input-group-text">$</span>
                                     <input type="number" id="maxPrice" name="maxPrice" class="form-control">
                                 </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="invisible">Filter Button</label>
+                                    <button type="submit" class="btn btn-info btn-sm">Filter</button>
+                                </div>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="invisible">Filter Button</label>
-                                <button type="submit" class="btn btn-primary">Filter</button>
-                            </div>
+
                         </div>
                     </form>
                 </div>
                 <h2 class="text-center text-dark mt-5">All Offers</h2>
                 <div class="table align-self-left">
-                    <!-- Add this code inside the <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5"> -->
+
 
 
                     <table class="table">
                         <thead>
                         <tr>
 
-                            <th>Image</th> <!-- Changed from "Image URL" to "Image" -->
+                            <th>Image</th>
                             <th>Brand</th>
                             <th>Model</th>
                             <th>Engine</th>
@@ -72,6 +73,11 @@
                             <td th:text="${offer.transmission}"></td>
                             <td th:text="${offer.year}"></td>
                             <td th:text="${offer.price}"></td>
+                            <td>
+                                <a th:href="@{/offers/offer-details/{offer-id}(offer-id=${offer.id})}" class="btn btn-info btn-sm">
+                                    Show Details
+                                </a>
+                            </td>
 
 
 

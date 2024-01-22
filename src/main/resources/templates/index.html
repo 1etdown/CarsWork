@@ -2,11 +2,6 @@
 <html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/head">
     <style>
-        body {
-            background-image: url('/templates/fragments/cars.png'); /* Adjust the path to the correct location of your image */
-            background-size: cover;
-            filter: blur(5px);
-        }
     </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -23,24 +18,26 @@
                     <span th:text="${#dates.createNow()}"></span>
                 </div>
 
-                <!-- Add this code where you want to display the last two offers in your HTML template -->
+
                 <div>
-                    <h2>Last Two Offers</h2>
-                    <ul>
-                        <!-- Iterate over the last two offers and display their details -->
-                        <li th:each="offer : ${lastTwoOffers}">
-                            <p th:text="'Offer ID: ' + ${offer.id}"></p>
+                    <h2>Top Offers</h2>
+                    <div>
+
+                        <div th:each="offer : ${lastTwoOffers}">
+                            <td>
+                                <img th:src="${offer.imageUrl}" alt="Offer Image" style="max-width: 100px; max-height: 100px;">
+                            </td>
                             <p th:text="'Model: ' + ${offer.model.name}"></p>
                             <p th:text="'Price: ' + ${offer.price}"></p>
-                            <!-- Add other details as needed -->
-                        </li>
-                    </ul>
+
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
 </main>
-<footer th:replace="fragments/footer"></footer> <!-- Ensure that the footer tag is properly closed -->
+<footer th:replace="fragments/footer"></footer>
 </body>
 </html>

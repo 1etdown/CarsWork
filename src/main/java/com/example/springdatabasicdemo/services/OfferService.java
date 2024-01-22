@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface OfferService {
-  //  List<ShowOfferDto> getLastTwoOffers();
+    List<ShowOfferDto> getTwoOffers();
     void createOffer(AddOfferDto offer);
 
     void addOffer(AddOfferDto offer);
@@ -23,7 +23,7 @@ public interface OfferService {
 
     OfferDto updateOffer(OfferDto offer);
 
-    ShowDetaildOfferDto offerDetails(UUID offerId);
+  ShowDetaildOfferDto offerDetails(UUID id);
 
     List<ShowOfferDto> getByPriceRange(Double minPrice, Double maxPrice);
 

@@ -25,7 +25,6 @@ public class Brand extends BaseEntity {
         this.modified = modified;
     }
 
-    // Пустой конструктор для Hibernate, обратите внимание на модификатор доступа
     protected Brand() {
     }
 
