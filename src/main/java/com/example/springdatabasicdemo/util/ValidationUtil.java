@@ -1,21 +1,12 @@
 package com.example.springdatabasicdemo.util;
 
+import jakarta.validation.ConstraintViolation;
 
-import jakarta.validation.Constraint;
-import jakarta.validation.Payload;
+import java.util.Set;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+public interface ValidationUtil {
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-@Constraint(validatedBy = ValidationUtilImpl.class)
-public @interface ValidationUtil {
-    String message() default "Company already exists!";
+    <E> boolean isValid(E object);
 
-    Class<?>[] groups() default {};
-
-    Class<? extends Payload>[] payload() default {};
+    <E> Set<ConstraintViolation<E>> violations(E object);
 }
